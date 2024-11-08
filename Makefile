@@ -2,9 +2,9 @@
 #
 # The primary targets in this file are:
 #
-# all					Fetch data and verify with log
-# download_and_check	Fetch data and verify
-# clean					Clean up generated files
+# all                   Fetch data and verify with log
+# download_and_check    Fetch data and verify
+# clean                 Clean up generated files
 #
 DATA ?= 
 REPORT ?= 
