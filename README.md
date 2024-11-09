@@ -14,7 +14,7 @@ On MPIIB remotes, use
 
 ```bash
 cd mpimg2mpiib
-make RUN_ID <run ID> DATA <weblinks.txt URL> REPORT <report.html URL>
+make RUN_ID=<run ID> DATA=<weblinks.txt URL> REPORT=<report.html URL>
 ```
 
 From remotes other than MPIIB or to change download location, also provide a `DATA_DIR`.
