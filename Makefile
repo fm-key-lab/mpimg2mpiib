@@ -9,15 +9,15 @@
 
 RUN_ID ?= 
 
-# URLS provided by MPIMG for a given run
+# URLs provided by MPIMG for a given run ID
 DATA ?= 
 REPORT ?= 
 URLS := $(DATA) $(REPORT)
 
-# Directory for lab data
-DATA_DIR ?= /mnt/rawdata/denovo_data
+# Directory for lab data on MPIIB servers
+DATA_DIR ?= /mnt/rawdata/denovo_data/$(shell date '+%Y')
 
-RUN_DIR := $(DATA_DIR)/$(shell date '+%Y')/$(RUN_ID)
+RUN_DIR := $(DATA_DIR)/$(RUN_ID)
 LOGFILE := $(RUN_ID).log
 
 QUIET := @
@@ -34,8 +34,9 @@ WGET := wget -nc
 .PHONY: all clean
 
 all:
-	$(MAKE) download_and_check | $(TEE) $(LOGFILE)
-	$(QUIET) "cd $(CURDIR) && make DATA=$(DATA) URL=$(URL) RUN_ID=$(RUN_ID)" > $(LOGFILE)
+	$(QUIET) echo $(shell date) > $(LOGFILE)
+	$(QUIET) echo "cd $(CURDIR) && make RUN_ID=$(RUN_ID) DATA=$(DATA) REPORT=$(REPORT) DATA_DIR=$(DATA_DIR)" >> $(LOGFILE)
+	$(QUIET) $(MAKE) download_and_check >> $(LOGFILE)
 	$(QUIET) $(MV) $(LOGFILE) $(RUN_DIR)
 
 .PHONY: download_and_check
